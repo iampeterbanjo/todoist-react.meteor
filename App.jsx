@@ -34,13 +34,13 @@ App = React.createClass({
 	},
 	
 	renderForm() {
-		var form = `<form className="new-task" onSubmit={this.handleSubmit} >
+		var form = <form className="new-task" onSubmit={this.handleSubmit} >
               <input
                 type="text"
                 ref="textInput"
                 placeholder="Type to add new tasks" />
-            </form>`;
-		return this.data.currentUser ? form : '';
+            </form>;
+		return Meteor.userId() ? form : '';
 	},
 
 	handleSubmit(event) {
@@ -75,7 +75,7 @@ App = React.createClass({
 					
 					<AccountsUIWrapper />
 
-          {this.renderForm()}
+					{this.renderForm()}
 				</header>
 
 				<ul>
