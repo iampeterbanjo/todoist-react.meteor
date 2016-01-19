@@ -29,7 +29,10 @@ App = React.createClass({
 
 	renderTasks() {
 		return this.data.tasks.map((task) => {
-			return <Task key={task._id} task={task} />;
+			const currentUserId = Meteor.userId();
+			const showPrivateButton = task.owner === currentUserId;
+			
+			return <Task key={task._id} task={task} showPrivateButton={showPrivateButton} />;
 		});
 	},
 	
