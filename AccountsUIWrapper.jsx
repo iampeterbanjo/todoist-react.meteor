@@ -9,6 +9,6 @@ AccountsUIWrapper = React.createClass({
 		Blaze.remove(this.view);
 	},
 	render() {
-		return <span ref="container">;
+		return <span ref="container" />;
 	}
 });

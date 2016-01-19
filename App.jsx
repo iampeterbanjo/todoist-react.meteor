@@ -32,6 +32,16 @@ App = React.createClass({
 			return <Task key={task._id} task={task} />;
 		});
 	},
+	
+	renderForm() {
+		var form = `<form className="new-task" onSubmit={this.handleSubmit} >
+              <input
+                type="text"
+                ref="textInput"
+                placeholder="Type to add new tasks" />
+            </form>`;
+		return this.data.currentUser ? form : '';
+	},
 
 	handleSubmit(event) {
 		event.preventDefault();
@@ -40,7 +50,9 @@ App = React.createClass({
 
 		Tasks.insert({
 			text: text,
-			createdAt: new Date()
+			createdAt: new Date(),
+			owner: Meteor.userId(),
+			username: Meteor.user().username
 		});
 
 		React.findDOMNode(this.refs.textInput).value = "";
@@ -63,9 +75,7 @@ App = React.createClass({
 					
 					<AccountsUIWrapper />
 
-					<form className="new-task" onSubmit={this.handleSubmit} >
-						<input type="text" ref="textInput" placeholder="Type to add new tasks" />
-					</form>
+          {this.renderForm()}
 				</header>
 
 				<ul>
